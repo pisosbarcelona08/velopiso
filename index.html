@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}: alertas de pisos en Barcelona</title>
+<meta name="description" content="Alertas instantáneas en Telegram de pisos y habitaciones nuevos en Barcelona: Idealista, Fotocasa, Habitaclia, pisos.com y Badi en un solo chat.">
+<link rel="stylesheet" href="style.css">
+<script src="lang.js"></script>
+</head>
+<body>
+<header>
+  <span class="brand">{{BRAND}}</span>
+  <span class="langs"><button data-lang="es">ES</button> <button data-lang="en">EN</button></span>
+</header>
+<main>
+  <h1 class="es">Llama de los primeros. No de los 200 siguientes.</h1>
+  <h1 class="en">Be one of the first to call. Not one of the next 200.</h1>
+  <p class="lead es">Un aviso en Telegram en cuanto sale un piso o una habitación en Barcelona que encaja contigo:
+    Idealista, Fotocasa, Habitaclia, pisos.com y Badi en un solo chat, sin duplicados.</p>
+  <p class="lead en">A Telegram ping as soon as a flat or room in Barcelona that fits you goes online:
+    Idealista, Fotocasa, Habitaclia, pisos.com and Badi in one chat, without duplicates.</p>
+  <a class="cta" href="https://t.me/{{BOT}}?start=web"><span class="es">Entrar en la beta gratuita</span><span class="en">Join the free beta</span></a>
+  <p class="note es">Beta con plazas limitadas, para que los avisos sigan llegando a pocos.</p>
+  <p class="note en">Limited beta seats, so alerts keep reaching only a few.</p>
+
+  <h2 class="es">Así llega un aviso</h2><h2 class="en">What an alert looks like</h2>
+  <div class="alert">
+    🏠 <b>1.150 €/mes</b> · 68 m² · 2 hab · 16,9 €/m²<br>
+    📍 Gràcia / Vila de Gràcia<br>
+    <span class="tag">🏢 agencia · 💑 menciona parejas · ⏱ ahora</span><br>
+    🔗 <u>Abrir en Habitaclia</u> · 💬 <u>WhatsApp</u>
+  </div>
+
+  <h2 class="es">Cómo funciona</h2><h2 class="en">How it works</h2>
+  <ol class="es">
+    <li>Abre el bot en Telegram y elige: piso o habitación, presupuesto, distritos, si buscáis en pareja.</li>
+    <li>Revisamos los cinco portales cada ~2 minutos y te mandamos solo lo nuevo que encaja.</li>
+    <li>Un toque abre el anuncio original; tu mensaje de presentación está listo para copiar.</li>
+  </ol>
+  <ol class="en">
+    <li>Open the bot in Telegram and choose: flat or room, budget, districts, whether you're a couple.</li>
+    <li>We check the five portals every ~2 minutes and send you only new listings that fit.</li>
+    <li>One tap opens the original listing; your intro message is ready to copy.</li>
+  </ol>
+
+  <div class="grid">
+    <div class="card"><b class="es">5 portales, 1 chat</b><b class="en">5 portals, 1 chat</b>
+      <span class="es">Muchas agencias publican antes en Habitaclia o pisos.com.</span>
+      <span class="en">Many agencies post on Habitaclia or pisos.com first.</span></div>
+    <div class="card"><b class="es">Filtros que importan</b><b class="en">Filters that matter</b>
+      <span class="es">Distritos, parejas, nº de compañeros. Descarta "no se admiten parejas".</span>
+      <span class="en">Districts, couples, number of flatmates. Skips "no couples" ads.</span></div>
+    <div class="card"><b class="es">Avisos de estafa</b><b class="en">Scam warnings</b>
+      <span class="es">Precio demasiado bajo, dueño "en el extranjero", pago antes de visitar…</span>
+      <span class="en">Price too low, owner "abroad", payment before the visit…</span></div>
+  </div>
+
+  <h2 class="es">Precio</h2><h2 class="en">Price</h2>
+  <p class="es">Durante la beta: <b>gratis</b>, acceso completo. Después: pases de 14 o 30 días, pago único,
+    <b>sin renovación automática</b>. Nunca te cobraremos sin que lo pidas.</p>
+  <p class="en">During the beta: <b>free</b>, full access. After that: 14- or 30-day passes, one-off payment,
+    <b>no auto-renewal</b>. We'll never charge you without you asking.</p>
+
+  <h2>FAQ</h2>
+  <details><summary class="es">¿Sois una inmobiliaria?</summary><summary class="en">Are you an agency?</summary>
+    <p class="es">No. Es una herramienta de avisos: te enviamos el enlace al anuncio original y contactas tú.
+      No estamos afiliados a ningún portal ni cobramos comisiones por alquilar.</p>
+    <p class="en">No. It's an alert tool: we send you the link to the original listing and you contact them.
+      We're not affiliated with any portal and take no fee for renting.</p></details>
+  <details><summary class="es">¿Me garantiza un piso?</summary><summary class="en">Does it guarantee a flat?</summary>
+    <p class="es">No. Te da velocidad y menos ruido; el resto depende del mercado y de ti.</p>
+    <p class="en">No. It gives you speed and less noise; the rest depends on the market and on you.</p></details>
+  <details><summary class="es">¿Y si veo una estafa?</summary><summary class="en">What about scams?</summary>
+    <p class="es">Marcamos señales de alerta, pero no verificamos los anuncios. Nunca pagues señal, fianza ni
+      "llaves" antes de visitar el piso en persona.</p>
+    <p class="en">We flag warning signs, but we don't verify listings. Never pay a deposit or for "keys"
+      before visiting the flat in person.</p></details>
+  <details><summary class="es">¿Teléfonos de particulares?</summary><summary class="en">Private owners' phones?</summary>
+    <p class="es">No los reenviamos: solo mostramos el teléfono profesional de las agencias. Para particulares,
+      el botón abre el anuncio y llamas desde el portal.</p>
+    <p class="en">We don't forward them: only agencies' business phones are shown. For private owners, the
+      button opens the listing and you call from the portal.</p></details>
+  <p><a href="https://t.me/{{CHANNEL}}"><span class="es">Canal público con una selección (30 min de retraso)</span><span class="en">Public channel with a selection (30 min delay)</span></a></p>
+</main>
+<footer>
+  <a href="legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> ·
+  <a href="legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a> ·
+  <a href="legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a><br>
+  <span class="es">Idealista, Fotocasa, Habitaclia, pisos.com y Badi son marcas de sus titulares, sin relación con {{BRAND}}.</span>
+  <span class="en">Idealista, Fotocasa, Habitaclia, pisos.com and Badi are trademarks of their owners, unrelated to {{BRAND}}.</span>
+</footer>
+</body>
+</html>

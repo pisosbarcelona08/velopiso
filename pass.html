@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{BRAND}}: pases</title>
+<link rel="stylesheet" href="style.css">
+<script src="lang.js"></script>
+<script>
+  // Fill in the Stripe Payment Link URLs (Dashboard -> Payment links). The bot links here with ?u=<telegram id>.
+  var PLANS = [
+    {days: 14, price: "9,90 €", url: "https://buy.stripe.com/REPLACE_14"},
+    {days: 30, price: "14,90 €", url: "https://buy.stripe.com/REPLACE_30"},
+    {days: 14, price: "4,90 €", url: "https://buy.stripe.com/REPLACE_FOUNDER", founder: true}
+  ];
+</script>
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">{{BRAND}}</a>
+  <span class="langs"><button data-lang="es">ES</button> <button data-lang="en">EN</button></span>
+</header>
+<main>
+  <h1 class="es">Pase de alertas instantáneas</h1><h1 class="en">Instant alerts pass</h1>
+  <p class="lead es">Alertas al segundo, teléfono y WhatsApp de las agencias y tu mensaje listo para copiar.
+    Pago único, <b>sin renovación automática</b>.</p>
+  <p class="lead en">Alerts in seconds, agencies' phone and WhatsApp, and your message ready to copy.
+    One-off payment, <b>no auto-renewal</b>.</p>
+
+  <div id="nouser" class="soft" hidden>
+    <span class="es">Abre este enlace desde el bot (comando /pass) para que el pase se active en tu cuenta.</span>
+    <span class="en">Open this link from the bot (/pass command) so the pass activates on your account.</span>
+  </div>
+
+  <div id="plans" class="grid"></div>
+
+  <label class="consent"><input type="checkbox" id="consent">
+    <span><span class="es">Quiero que el servicio empiece ya. Sé que, si desisto en los 14 días siguientes,
+      me devolverán la parte proporcional de los días no usados.</span>
+      <span class="en">I want the service to start now. I understand that if I withdraw within 14 days,
+      I'll be refunded the share of unused days.</span></span></label>
+  <p class="note es">Precio final. El pago lo gestiona Stripe: no vemos los datos de tu tarjeta.</p>
+  <p class="note en">Final price. Payment is handled by Stripe: we never see your card details.</p>
+
+  <h2 class="es">Desistir o pedir un reembolso</h2><h2 class="en">Withdraw or get a refund</h2>
+  <p class="es">Puedes desistir cuando quieras en los 14 días siguientes a la compra: escribe /refund en el bot
+    o usa este botón. Te devolvemos la parte no usada al mismo medio de pago.</p>
+  <p class="en">You can withdraw at any time within 14 days of purchase: send /refund to the bot or use this
+    button. We refund the unused part to the same payment method.</p>
+  <a class="cta" style="background:transparent;color:inherit;border:1px solid currentColor"
+     href="https://t.me/{{BOT}}?start=refund"><span class="es">Desistir del contrato</span><span class="en">Withdraw from the contract</span></a>
+</main>
+<footer>
+  <a href="legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> ·
+  <a href="legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a> ·
+  <a href="legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a>
+</footer>
+<script>
+  var q = new URLSearchParams(location.search);
+  var uid = (q.get("u") || "").replace(/\D/g, "");
+  var founder = q.get("f") === "1";
+  var box = document.getElementById("plans");
+  var consent = document.getElementById("consent");
+  if (!uid) document.getElementById("nouser").hidden = false;
+  PLANS.filter(function (p) { return !p.founder || founder; }).forEach(function (p) {
+    var card = document.createElement("div");
+    card.className = "card plan";
+    var label = document.createElement("div");
+    label.innerHTML = '<div class="price"></div><div class="note"></div>';
+    label.querySelector(".price").textContent = p.price;
+    label.querySelector(".note").innerHTML = '<span class="es">' + p.days + ' días' + (p.founder ? ' · precio fundador' : '') +
+      '</span><span class="en">' + p.days + ' days' + (p.founder ? ' · founder price' : '') + '</span>';
+    var btn = document.createElement("a");
+    btn.className = "cta";
+    btn.innerHTML = '<span class="es">Comprar</span><span class="en">Buy</span>';
+    btn.href = "#";
+    btn.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      if (!uid || !consent.checked) { consent.focus(); return; }
+      location.href = p.url + "?client_reference_id=" + uid;
+    });
+    card.appendChild(label);
+    card.appendChild(btn);
+    box.appendChild(card);
+  });
+  function sync() {
+    document.querySelectorAll("#plans .cta").forEach(function (b) {
+      b.style.opacity = consent.checked && uid ? "1" : ".45";
+    });
+  }
+  consent.addEventListener("change", sync);
+  sync();
+</script>
+</body>
+</html>
