@@ -3,92 +3,154 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{BRAND}}: alertas de pisos en Barcelona</title>
+<title>VeloPiso · Alertas de pisos en Barcelona</title>
 <meta name="description" content="Alertas instantáneas en Telegram de pisos y habitaciones nuevos en Barcelona: Idealista, Fotocasa, Habitaclia, pisos.com y Badi en un solo chat.">
+<meta property="og:title" content="VeloPiso · Llama de los primeros">
+<meta property="og:description" content="Pisos y habitaciones nuevos en Barcelona, al instante en Telegram. 5 portales, tus barrios, sin duplicados. Beta gratuita.">
+<meta property="og:url" content="https://pisosbarcelona08.github.io/velopiso/">
+<meta name="theme-color" content="#c2410c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23c2410c'/><path fill='white' d='M13.5 3 5.5 13.3h5.5L10.2 21l8.3-10.3H13z'/></svg>">
 <link rel="stylesheet" href="style.css">
 <script src="lang.js"></script>
 </head>
 <body>
-<header>
-  <span class="brand">{{BRAND}}</span>
-  <span class="langs"><button data-lang="es">ES</button> <button data-lang="en">EN</button></span>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="./"><span class="logo"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M13.5 2 4.5 13.5h6.2L9.8 22l9-11.5h-6.2z"/></svg></span>VeloPiso</a>
+  <span class="langs"><button data-lang="es">ES</button><button data-lang="en">EN</button></span>
 </header>
+
 <main>
-  <h1 class="es">Llama de los primeros. No de los 200 siguientes.</h1>
-  <h1 class="en">Be one of the first to call. Not one of the next 200.</h1>
-  <p class="lead es">Un aviso en Telegram en cuanto sale un piso o una habitación en Barcelona que encaja contigo:
-    Idealista, Fotocasa, Habitaclia, pisos.com y Badi en un solo chat, sin duplicados.</p>
-  <p class="lead en">A Telegram ping as soon as a flat or room in Barcelona that fits you goes online:
-    Idealista, Fotocasa, Habitaclia, pisos.com and Badi in one chat, without duplicates.</p>
-  <a class="cta" href="https://t.me/{{BOT}}?start=web"><span class="es">Entrar en la beta gratuita</span><span class="en">Join the free beta</span></a>
-  <p class="note es">Beta con plazas limitadas, para que los avisos sigan llegando a pocos.</p>
-  <p class="note en">Limited beta seats, so alerts keep reaching only a few.</p>
-
-  <h2 class="es">Así llega un aviso</h2><h2 class="en">What an alert looks like</h2>
-  <div class="alert">
-    🏠 <b>1.150 €/mes</b> · 68 m² · 2 hab · 16,9 €/m²<br>
-    📍 Gràcia / Vila de Gràcia<br>
-    <span class="tag">🏢 agencia · 💑 menciona parejas · ⏱ ahora</span><br>
-    🔗 <u>Abrir en Habitaclia</u> · 💬 <u>WhatsApp</u>
+<section class="hero">
+  <div>
+    <p class="eyebrow"><span class="es">Barcelona · Beta gratuita</span><span class="en">Barcelona · Free beta</span></p>
+    <h1><span class="es">Llama de los primeros.<br><span class="accent">No de los 200 siguientes.</span></span>
+        <span class="en">Be one of the first to call.<br><span class="accent">Not one of the next 200.</span></span></h1>
+    <p class="lead es">Un aviso en Telegram en cuanto sale un piso o una habitación que encaja contigo.
+      Idealista, Fotocasa, Habitaclia, pisos.com y Badi en un solo chat, filtrado por tus barrios y sin duplicados.</p>
+    <p class="lead en">A Telegram ping as soon as a flat or room that fits you goes online. Idealista, Fotocasa,
+      Habitaclia, pisos.com and Badi in one chat, filtered by your neighbourhoods, without duplicates.</p>
+    <div class="ctas">
+      <a class="cta" href="https://t.me/VeloPisobot?start=web"><span class="es">Entrar en la beta gratuita</span><span class="en">Join the free beta</span> →</a>
+      <a class="cta ghost" href="https://t.me/velopiso_bcn"><span class="es">Ver el canal</span><span class="en">See the channel</span></a>
+    </div>
+    <p class="note"><span class="es">Plazas limitadas, para que los avisos sigan llegando a pocos.</span>
+      <span class="en">Limited seats, so alerts keep reaching only a few.</span></p>
   </div>
 
-  <h2 class="es">Cómo funciona</h2><h2 class="en">How it works</h2>
-  <ol class="es">
-    <li>Abre el bot en Telegram y elige: piso o habitación, presupuesto, distritos, si buscáis en pareja.</li>
-    <li>Revisamos los cinco portales cada ~2 minutos y te mandamos solo lo nuevo que encaja.</li>
-    <li>Un toque abre el anuncio original; tu mensaje de presentación está listo para copiar.</li>
-  </ol>
-  <ol class="en">
-    <li>Open the bot in Telegram and choose: flat or room, budget, districts, whether you're a couple.</li>
-    <li>We check the five portals every ~2 minutes and send you only new listings that fit.</li>
-    <li>One tap opens the original listing; your intro message is ready to copy.</li>
-  </ol>
+  <div class="tg" aria-label="Ejemplo de aviso">
+    <div class="chat-head"><span class="avatar"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M13.5 2 4.5 13.5h6.2L9.8 22l9-11.5h-6.2z"/></svg></span><div><b>VeloPiso</b><br>bot</div></div>
+    <div class="bubble">
+      🏠 <b>1.150 €/mes</b> · 68 m² · 2 hab · 16,9 €/m²<br>
+      📍 Gràcia / Vila de Gràcia<br>
+      <span class="muted">🏢 agencia · 💑 menciona parejas · ⏱ ahora</span>
+      <code>¡Hola! Somos una pareja con contrato indefinido. ¿Podríamos visitarlo hoy?</code>
+      <span class="time">20:14</span>
+    </div>
+    <div class="kbd"><span>🔗 Habitaclia</span><span>💬 WhatsApp</span></div>
+  </div>
+</section>
 
+<div class="portals"><span>Idealista</span><span>Fotocasa</span><span>Habitaclia</span><span>pisos.com</span><span>Badi</span></div>
+
+<section>
+  <h2><span class="es">Cómo funciona</span><span class="en">How it works</span></h2>
   <div class="grid">
-    <div class="card"><b class="es">5 portales, 1 chat</b><b class="en">5 portals, 1 chat</b>
-      <span class="es">Muchas agencias publican antes en Habitaclia o pisos.com.</span>
-      <span class="en">Many agencies post on Habitaclia or pisos.com first.</span></div>
-    <div class="card"><b class="es">Filtros que importan</b><b class="en">Filters that matter</b>
-      <span class="es">Distritos, parejas, nº de compañeros. Descarta "no se admiten parejas".</span>
-      <span class="en">Districts, couples, number of flatmates. Skips "no couples" ads.</span></div>
-    <div class="card"><b class="es">Avisos de estafa</b><b class="en">Scam warnings</b>
-      <span class="es">Precio demasiado bajo, dueño "en el extranjero", pago antes de visitar…</span>
-      <span class="en">Price too low, owner "abroad", payment before the visit…</span></div>
+    <div class="card"><span class="step-n">1</span>
+      <h3><span class="es">Dinos qué buscas</span><span class="en">Tell us what you want</span></h3>
+      <p><span class="es">Piso o habitación, presupuesto, barrios y si buscáis en pareja. 30 segundos, con botones.</span>
+        <span class="en">Flat or room, budget, neighbourhoods, couple or not. 30 seconds, all buttons.</span></p></div>
+    <div class="card"><span class="step-n">2</span>
+      <h3><span class="es">Vigilamos por ti</span><span class="en">We watch for you</span></h3>
+      <p><span class="es">Revisamos los cinco portales cada ~2 minutos y solo te mandamos lo nuevo que encaja.</span>
+        <span class="en">We check the five portals every ~2 minutes and only send what's new and fits.</span></p></div>
+    <div class="card"><span class="step-n">3</span>
+      <h3><span class="es">Llamas primero</span><span class="en">You call first</span></h3>
+      <p><span class="es">Un toque abre el anuncio original; tu mensaje de presentación está listo para copiar.</span>
+        <span class="en">One tap opens the original listing; your intro message is ready to copy.</span></p></div>
   </div>
+</section>
 
-  <h2 class="es">Precio</h2><h2 class="en">Price</h2>
-  <p class="es">Durante la beta: <b>gratis</b>, acceso completo. Después: pases de 14 o 30 días, pago único,
-    <b>sin renovación automática</b>. Nunca te cobraremos sin que lo pidas.</p>
-  <p class="en">During the beta: <b>free</b>, full access. After that: 14- or 30-day passes, one-off payment,
-    <b>no auto-renewal</b>. We'll never charge you without you asking.</p>
+<section>
+  <h2><span class="es">Menos ruido, más visitas</span><span class="en">Less noise, more viewings</span></h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🗂</span><h3><span class="es">5 portales, 1 chat</span><span class="en">5 portals, 1 chat</span></h3>
+      <p><span class="es">Muchas agencias publican antes en Habitaclia o pisos.com que en Idealista. El mismo piso no te llega dos veces.</span>
+        <span class="en">Many agencies post on Habitaclia or pisos.com before Idealista. The same flat never reaches you twice.</span></p></div>
+    <div class="card"><span class="icon">📍</span><h3><span class="es">Tus 73 barrios</span><span class="en">Your 73 neighbourhoods</span></h3>
+      <p><span class="es">Elige distritos enteros o solo Poble-sec, Gòtic, Sant Antoni… lo que de verdad te interesa.</span>
+        <span class="en">Pick whole districts or just Poble-sec, Gòtic, Sant Antoni… whatever you actually want.</span></p></div>
+    <div class="card"><span class="icon">💑</span><h3><span class="es">Pensado para parejas</span><span class="en">Couple-friendly</span></h3>
+      <p><span class="es">Descarta "no se admiten parejas" y las habitaciones de uso individual.</span>
+        <span class="en">Skips "no couples" ads and single-occupancy rooms.</span></p></div>
+    <div class="card"><span class="icon">⚠️</span><h3><span class="es">Avisos de estafa</span><span class="en">Scam warnings</span></h3>
+      <p><span class="es">Precio demasiado bajo, dueño "en el extranjero", pago antes de visitar…</span>
+        <span class="en">Price too low, owner "abroad", payment before the visit…</span></p></div>
+  </div>
+</section>
 
+<section>
+  <div class="card price">
+    <div>
+      <h2 style="margin-bottom:4px"><span class="es">Precio</span><span class="en">Price</span></h2>
+      <div class="big"><span class="es">Gratis durante la beta</span><span class="en">Free during the beta</span></div>
+    </div>
+    <ul>
+      <li><span class="es">Acceso completo, sin tarjeta.</span><span class="en">Full access, no card.</span></li>
+      <li><span class="es">Después: pases de 14 o 30 días, pago único.</span><span class="en">Then: 14- or 30-day passes, one-off payment.</span></li>
+      <li><span class="es"><b>Sin renovación automática.</b> Nunca te cobraremos sin que lo pidas.</span>
+        <span class="en"><b>No auto-renewal.</b> We'll never charge you without you asking.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
   <h2>FAQ</h2>
-  <details><summary class="es">¿Sois una inmobiliaria?</summary><summary class="en">Are you an agency?</summary>
+  <details><summary><span class="es">¿Sois una inmobiliaria?</span><span class="en">Are you an agency?</span></summary>
     <p class="es">No. Es una herramienta de avisos: te enviamos el enlace al anuncio original y contactas tú.
       No estamos afiliados a ningún portal ni cobramos comisiones por alquilar.</p>
     <p class="en">No. It's an alert tool: we send you the link to the original listing and you contact them.
       We're not affiliated with any portal and take no fee for renting.</p></details>
-  <details><summary class="es">¿Me garantiza un piso?</summary><summary class="en">Does it guarantee a flat?</summary>
+  <details><summary><span class="es">¿Me garantiza un piso?</span><span class="en">Does it guarantee a flat?</span></summary>
     <p class="es">No. Te da velocidad y menos ruido; el resto depende del mercado y de ti.</p>
     <p class="en">No. It gives you speed and less noise; the rest depends on the market and on you.</p></details>
-  <details><summary class="es">¿Y si veo una estafa?</summary><summary class="en">What about scams?</summary>
+  <details><summary><span class="es">¿Y si es una estafa?</span><span class="en">What about scams?</span></summary>
     <p class="es">Marcamos señales de alerta, pero no verificamos los anuncios. Nunca pagues señal, fianza ni
       "llaves" antes de visitar el piso en persona.</p>
     <p class="en">We flag warning signs, but we don't verify listings. Never pay a deposit or for "keys"
       before visiting the flat in person.</p></details>
-  <details><summary class="es">¿Teléfonos de particulares?</summary><summary class="en">Private owners' phones?</summary>
-    <p class="es">No los reenviamos: solo mostramos el teléfono profesional de las agencias. Para particulares,
-      el botón abre el anuncio y llamas desde el portal.</p>
-    <p class="en">We don't forward them: only agencies' business phones are shown. For private owners, the
-      button opens the listing and you call from the portal.</p></details>
-  <p><a href="https://t.me/{{CHANNEL}}"><span class="es">Canal público con una selección (30 min de retraso)</span><span class="en">Public channel with a selection (30 min delay)</span></a></p>
+  <details><summary><span class="es">¿Mostráis teléfonos de particulares?</span><span class="en">Do you show private owners' phones?</span></summary>
+    <p class="es">No: solo el teléfono profesional de las agencias. Con particulares, el botón abre el anuncio y
+      contactas desde el portal.</p>
+    <p class="en">No: only agencies' business phones. For private owners, the button opens the listing and you
+      contact them through the portal.</p></details>
+  <details><summary><span class="es">¿Necesito Telegram?</span><span class="en">Do I need Telegram?</span></summary>
+    <p class="es">Sí, es gratis y llega al instante, incluso con el móvil bloqueado.</p>
+    <p class="en">Yes. It's free and alerts arrive instantly, even with your phone locked.</p></details>
+</section>
+
+<section>
+  <div class="band">
+    <div>
+      <h2><span class="es">¿Quieres verlo antes?</span><span class="en">Want a look first?</span></h2>
+      <p><span class="es">El canal público publica una selección con 30 minutos de retraso.</span>
+        <span class="en">The public channel posts a selection with a 30-minute delay.</span></p>
+    </div>
+    <a class="cta ghost" href="https://t.me/velopiso_bcn">t.me/velopiso_bcn</a>
+  </div>
+</section>
 </main>
+
 <footer>
-  <a href="legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> ·
-  <a href="legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a> ·
-  <a href="legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a><br>
-  <span class="es">Idealista, Fotocasa, Habitaclia, pisos.com y Badi son marcas de sus titulares, sin relación con {{BRAND}}.</span>
-  <span class="en">Idealista, Fotocasa, Habitaclia, pisos.com and Badi are trademarks of their owners, unrelated to {{BRAND}}.</span>
+  <div class="links">
+    <a href="legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a>
+    <a href="legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a>
+    <a href="legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a>
+    <a href="mailto:pisosbarcelona08@gmail.com"><span class="es">Contacto</span><span class="en">Contact</span></a>
+  </div>
+  <span class="es">Idealista, Fotocasa, Habitaclia, pisos.com y Badi son marcas de sus titulares, sin relación con VeloPiso.</span>
+  <span class="en">Idealista, Fotocasa, Habitaclia, pisos.com and Badi are trademarks of their owners, unrelated to VeloPiso.</span>
 </footer>
+</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>{{BRAND}}: pases</title>
+<title>VeloPiso: pases</title>
 <link rel="stylesheet" href="style.css">
 <script src="lang.js"></script>
 <script>
@@ -15,20 +15,23 @@
     {days: 14, price: "4,90 €", url: "https://buy.stripe.com/REPLACE_FOUNDER", founder: true}
   ];
 </script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23c2410c'/><path fill='white' d='M13.5 3 5.5 13.3h5.5L10.2 21l8.3-10.3H13z'/></svg>">
 </head>
 <body>
-<header>
-  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">{{BRAND}}</a>
-  <span class="langs"><button data-lang="es">ES</button> <button data-lang="en">EN</button></span>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="./"><span class="logo"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M13.5 2 4.5 13.5h6.2L9.8 22l9-11.5h-6.2z"/></svg></span>VeloPiso</a>
+  <span class="langs"><button data-lang="es">ES</button><button data-lang="en">EN</button></span>
 </header>
 <main>
+<section>
   <h1 class="es">Pase de alertas instantáneas</h1><h1 class="en">Instant alerts pass</h1>
   <p class="lead es">Alertas al segundo, teléfono y WhatsApp de las agencias y tu mensaje listo para copiar.
     Pago único, <b>sin renovación automática</b>.</p>
   <p class="lead en">Alerts in seconds, agencies' phone and WhatsApp, and your message ready to copy.
     One-off payment, <b>no auto-renewal</b>.</p>
 
-  <div id="nouser" class="soft" hidden>
+  <div id="nouser" class="soft-box" hidden>
     <span class="es">Abre este enlace desde el bot (comando /pass) para que el pase se active en tu cuenta.</span>
     <span class="en">Open this link from the bot (/pass command) so the pass activates on your account.</span>
   </div>
@@ -48,14 +51,20 @@
     o usa este botón. Te devolvemos la parte no usada al mismo medio de pago.</p>
   <p class="en">You can withdraw at any time within 14 days of purchase: send /refund to the bot or use this
     button. We refund the unused part to the same payment method.</p>
-  <a class="cta" style="background:transparent;color:inherit;border:1px solid currentColor"
-     href="https://t.me/{{BOT}}?start=refund"><span class="es">Desistir del contrato</span><span class="en">Withdraw from the contract</span></a>
+  <a class="cta ghost"
+     href="https://t.me/VeloPisobot?start=refund"><span class="es">Desistir del contrato</span><span class="en">Withdraw from the contract</span></a>
+</section>
 </main>
 <footer>
-  <a href="legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> ·
-  <a href="legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a> ·
-  <a href="legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a>
+  <div class="links">
+    <a href="./"><span class="es">Inicio</span><span class="en">Home</span></a>
+    <a href="./legal/terms.html"><span class="es">Condiciones</span><span class="en">Terms</span></a>
+    <a href="./legal/privacy.html"><span class="es">Privacidad</span><span class="en">Privacy</span></a>
+    <a href="./legal/notice.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a>
+    <a href="mailto:pisosbarcelona08@gmail.com"><span class="es">Contacto</span><span class="en">Contact</span></a>
+  </div>
 </footer>
+</div>
 <script>
   var q = new URLSearchParams(location.search);
   var uid = (q.get("u") || "").replace(/\D/g, "");
@@ -67,8 +76,8 @@
     var card = document.createElement("div");
     card.className = "card plan";
     var label = document.createElement("div");
-    label.innerHTML = '<div class="price"></div><div class="note"></div>';
-    label.querySelector(".price").textContent = p.price;
+    label.innerHTML = '<div class="amount"></div><div class="note"></div>';
+    label.querySelector(".amount").textContent = p.price;
     label.querySelector(".note").innerHTML = '<span class="es">' + p.days + ' días' + (p.founder ? ' · precio fundador' : '') +
       '</span><span class="en">' + p.days + ' days' + (p.founder ? ' · founder price' : '') + '</span>';
     var btn = document.createElement("a");
