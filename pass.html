@@ -8,14 +8,31 @@
 <link rel="stylesheet" href="style.css">
 <script src="lang.js"></script>
 <script>
-  // Fill in the Stripe Payment Link URLs (Dashboard -> Payment links). The bot links here with ?u=<telegram id>.
+  // ---- edit here --------------------------------------------------------------------------
+  // PAYPAL: your paypal.me name (paypal.me/<this>). STRIPE: optional Payment Link per plan; when set,
+  // a card button appears and the pass activates by itself. Keep prices in sync with config.yaml.
+  var PAYPAL = "REPLACE_WITH_PAYPAL_ME_NAME";
   var PLANS = [
-    {days: 14, price: "9,90 €", url: "https://buy.stripe.com/REPLACE_14"},
-    {days: 30, price: "14,90 €", url: "https://buy.stripe.com/REPLACE_30"},
-    {days: 14, price: "4,90 €", url: "https://buy.stripe.com/REPLACE_FOUNDER", founder: true}
+    {days: 14, price: "7,90 €", amount: "7.90", stripe: ""},
+    {days: 30, price: "12,90 €", amount: "12.90", stripe: "", best: true}
   ];
+  // -----------------------------------------------------------------------------------------
 </script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23c2410c'/><path fill='white' d='M13.5 3 5.5 13.3h5.5L10.2 21l8.3-10.3H13z'/></svg>">
+<style>
+  .codebox { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--card);
+             border: 1px dashed var(--accent); border-radius: var(--radius); padding: 14px 16px; margin: 6px 0 22px; }
+  .codebox code { font-size: 24px; font-weight: 800; letter-spacing: .02em; color: var(--accent);
+                  font-family: ui-monospace, Consolas, monospace; }
+  .codebox button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: none; color: var(--fg);
+                    border-radius: 10px; padding: 6px 12px; cursor: pointer; }
+  .steps { margin: 0 0 22px; padding-left: 22px; color: var(--muted); }
+  .steps b { color: var(--fg); }
+  .plan .buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+  .plan .badge { font-size: 12px; font-weight: 700; color: var(--accent); background: var(--soft); border-radius: 999px;
+                 padding: 2px 9px; margin-left: 8px; vertical-align: middle; }
+  .cta.off { opacity: .45; cursor: not-allowed; }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -32,19 +49,38 @@
     One-off payment, <b>no auto-renewal</b>.</p>
 
   <div id="nouser" class="soft-box" hidden>
-    <span class="es">Abre este enlace desde el bot (comando /pass) para que el pase se active en tu cuenta.</span>
-    <span class="en">Open this link from the bot (/pass command) so the pass activates on your account.</span>
+    <span class="es">Abre este enlace desde el bot (comando /pass): así sabremos a qué cuenta activar el pase.</span>
+    <span class="en">Open this link from the bot (/pass command), so we know which account to activate.</span>
   </div>
 
-  <div id="plans" class="grid"></div>
+  <div id="codewrap" hidden>
+    <div class="es note">Tu código de pago</div><div class="en note">Your payment code</div>
+    <div class="codebox"><code id="code"></code>
+      <button id="copy" type="button"><span class="es">Copiar</span><span class="en">Copy</span></button></div>
+    <ol class="steps es">
+      <li>Marca la casilla y elige tu pase.</li>
+      <li>Paga con PayPal y <b>escribe tu código en la nota</b> del pago (elige «bienes o servicios»: tienes protección del comprador).</li>
+      <li>Activamos tu pase en cuanto vemos el pago (normalmente el mismo día) y el bot te lo confirma.</li>
+    </ol>
+    <ol class="steps en">
+      <li>Tick the box and choose your pass.</li>
+      <li>Pay with PayPal and <b>write your code in the payment note</b> (choose "goods and services": you get buyer protection).</li>
+      <li>We activate your pass as soon as we see the payment (usually the same day) and the bot confirms it.</li>
+    </ol>
+  </div>
 
   <label class="consent"><input type="checkbox" id="consent">
     <span><span class="es">Quiero que el servicio empiece ya. Sé que, si desisto en los 14 días siguientes,
       me devolverán la parte proporcional de los días no usados.</span>
       <span class="en">I want the service to start now. I understand that if I withdraw within 14 days,
       I'll be refunded the share of unused days.</span></span></label>
-  <p class="note es">Precio final. El pago lo gestiona Stripe: no vemos los datos de tu tarjeta.</p>
-  <p class="note en">Final price. Payment is handled by Stripe: we never see your card details.</p>
+
+  <div id="plans" class="grid"></div>
+
+  <p class="note es">Precio final. El pago lo gestiona PayPal (o Stripe, con tarjeta): no vemos tus datos de pago.</p>
+  <p class="note en">Final price. Payment is handled by PayPal (or Stripe, by card): we never see your payment details.</p>
+  <p class="note" id="nopaypal" hidden><span class="es">Los pagos con PayPal se activan en breve.</span>
+    <span class="en">PayPal payments will be available shortly.</span></p>
 
   <h2 class="es">Desistir o pedir un reembolso</h2><h2 class="en">Withdraw or get a refund</h2>
   <p class="es">Puedes desistir cuando quieras en los 14 días siguientes a la compra: escribe /refund en el bot
@@ -66,36 +102,60 @@
 </footer>
 </div>
 <script>
-  var q = new URLSearchParams(location.search);
-  var uid = (q.get("u") || "").replace(/\D/g, "");
-  var founder = q.get("f") === "1";
-  var box = document.getElementById("plans");
+  var uid = (new URLSearchParams(location.search).get("u") || "").replace(/\D/g, "");
+  var code = uid ? "VP-" + uid : "";
+  var paypalReady = PAYPAL && PAYPAL.indexOf("REPLACE") !== 0;
   var consent = document.getElementById("consent");
-  if (!uid) document.getElementById("nouser").hidden = false;
-  PLANS.filter(function (p) { return !p.founder || founder; }).forEach(function (p) {
+  var box = document.getElementById("plans");
+  document.getElementById(uid ? "codewrap" : "nouser").hidden = false;
+  document.getElementById("code").textContent = code;
+  document.getElementById("nopaypal").hidden = paypalReady;
+  document.getElementById("copy").addEventListener("click", function () {
+    try { navigator.clipboard.writeText(code); } catch (e) {}
+    this.querySelector(".es").textContent = "¡Copiado!"; this.querySelector(".en").textContent = "Copied!";
+  });
+
+  function button(es, en, href) {
+    var a = document.createElement("a");
+    a.className = "cta";
+    a.innerHTML = '<span class="es">' + es + '</span><span class="en">' + en + '</span>';
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.addEventListener("click", function (ev) {
+      if (!uid || !consent.checked) { ev.preventDefault(); consent.focus(); }
+    });
+    return a;
+  }
+
+  PLANS.forEach(function (p) {
     var card = document.createElement("div");
     card.className = "card plan";
     var label = document.createElement("div");
-    label.innerHTML = '<div class="amount"></div><div class="note"></div>';
+    label.innerHTML = '<div class="amount"></div><div class="note"><span class="es">' + p.days + ' días</span>' +
+      '<span class="en">' + p.days + ' days</span>' +
+      (p.best ? '<span class="badge"><span class="es">más elegido</span><span class="en">most chosen</span></span>' : '') +
+      '</div>';
     label.querySelector(".amount").textContent = p.price;
-    label.querySelector(".note").innerHTML = '<span class="es">' + p.days + ' días' + (p.founder ? ' · precio fundador' : '') +
-      '</span><span class="en">' + p.days + ' days' + (p.founder ? ' · founder price' : '') + '</span>';
-    var btn = document.createElement("a");
-    btn.className = "cta";
-    btn.innerHTML = '<span class="es">Comprar</span><span class="en">Buy</span>';
-    btn.href = "#";
-    btn.addEventListener("click", function (ev) {
-      ev.preventDefault();
-      if (!uid || !consent.checked) { consent.focus(); return; }
-      location.href = p.url + "?client_reference_id=" + uid;
-    });
+    var buttons = document.createElement("div");
+    buttons.className = "buttons";
+    if (paypalReady) {
+      buttons.appendChild(button("Pagar con PayPal", "Pay with PayPal",
+        "https://paypal.me/" + encodeURIComponent(PAYPAL) + "/" + p.amount + "EUR"));
+    }
+    if (p.stripe) {
+      var card_btn = button("Pagar con tarjeta", "Pay by card", p.stripe + "?client_reference_id=" + uid);
+      if (paypalReady) card_btn.classList.add("ghost");
+      buttons.appendChild(card_btn);
+    }
     card.appendChild(label);
-    card.appendChild(btn);
+    card.appendChild(buttons);
     box.appendChild(card);
   });
+
   function sync() {
     document.querySelectorAll("#plans .cta").forEach(function (b) {
-      b.style.opacity = consent.checked && uid ? "1" : ".45";
+      b.classList.toggle("off", !(consent.checked && uid));
     });
   }
   consent.addEventListener("change", sync);

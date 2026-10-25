@@ -78,6 +78,10 @@ h2 { font-size: clamp(24px, 3.2vw, 32px); letter-spacing: -0.025em; line-height:
 .price ul { margin: 0; padding-left: 20px; color: var(--muted); }
 .price li { margin: 4px 0; }
 
+.stat-card { display: flex; gap: 20px; align-items: center; }
+.stat-n { font-size: clamp(48px, 8vw, 72px); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); line-height: 1; }
+.stat { padding-top: 8px; }
+
 /* faq */
 details { border-bottom: 1px solid var(--line); }
 details:first-of-type { border-top: 1px solid var(--line); }
